@@ -1,12 +1,19 @@
 // components/CarCard.tsx
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
-import { Car } from '@/types/car';
+import { Car } from '@/shared/types/car';
 import Card from './Card';
 
 export default function CarCard({ car }: { car: Car }) {
+  const onEdit = () => {
+
+  }
+  const onDelete = () => {
+
+  }
+
   return (
-    <Card>
+    <Card onEdit={onEdit} onDelete={onDelete}>
       <Text style={styles.title}>{car.vin}</Text>
       <Text>Цвет: {car.color}</Text>
       <Text>Пробег: {car.mileage} км</Text>

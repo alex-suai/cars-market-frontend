@@ -1,11 +1,14 @@
+// @/store/SalesContext.tsx
+
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import axiosClient from '../api/axiosClient';
-import { Sale } from '@/types/sale';
+import { Sale } from '@/shared/types/sale';
+import { salesApi } from '@/shared/api/sales';
 
 interface SalesContextValue {
   items: Sale[];
   loading: boolean;
   fetchSales: () => void;
+  deleteSale: (id: number) => void;
 }
 
 const SalesContext = createContext<SalesContextValue | undefined>(undefined);
@@ -17,10 +20,22 @@ export const SalesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const fetchSales = async () => {
     setLoading(true);
     try {
-      const response = await axiosClient.get<Sale[]>('/Sales');
-      setItems(response.data);
+      const { data } = await salesApi.getAllSales();
+      setItems(data);
     } catch (error) {
-      console.error('Failed to fetch Sales:', error);
+      console.error('Failed to fetch sales:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const deleteSale = async (id: number) => {
+    setLoading(true);
+    try {
+      await salesApi.deleteSale(id);
+      setItems(prev => prev.filter(s => s.id !== id));
+    } catch (error) {
+      console.error('Failed to delete sale:', error);
     } finally {
       setLoading(false);
     }
@@ -31,7 +46,9 @@ export const SalesProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   }, []);
 
   return (
-    <SalesContext.Provider value={{ items, loading, fetchSales }}>
+    <SalesContext.Provider
+      value={{ items, loading, fetchSales, deleteSale }}
+    >
       {children}
     </SalesContext.Provider>
   );

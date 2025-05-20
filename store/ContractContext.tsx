@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import axiosClient from '../api/axiosClient';
-import { Contract } from '@/types/contract';
+import axiosClient from '@/shared/api/axiosClient';
+import { Contract } from '@/shared/types/contract';
 
 interface ContractsContextValue {
   items: Contract[];
@@ -40,7 +40,7 @@ export const ContractsProvider: React.FC<{ children: React.ReactNode }> = ({ chi
 export const useContracts = () => {
   const context = useContext(ContractsContext);
   if (!context) {
-    throw new Error('useCars must be used within a CarsProvider');
+    throw new Error('useContracts must be used within a ContractsProvider');
   }
   return context;
 };
