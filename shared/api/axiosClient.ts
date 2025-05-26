@@ -1,7 +1,8 @@
 import axios from 'axios';
+import {config} from '@/shared/config';
 
 const client = axios.create({
-    baseURL: 'http://localhost:3000/',
+    baseURL: config.apiUrl,
     timeout: 5000,
 });
 

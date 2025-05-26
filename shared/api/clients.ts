@@ -6,6 +6,6 @@ export const clientApi = {
   getAllClients: () => axiosClient.get<Client[]>('/clients'),
   // getClientById = (id: number) => axiosClient.get<Client>(`/clients/${id}`),
   createClient: (car: CreateClientDto) => axiosClient.post<Client>('/clients', car),
-  updateClient: (id: number, car: UpdateClientDto) => axiosClient.put<Client>(`/clients/${id}`, car),
+  updateClient: (id: number, car: UpdateClientDto) => axiosClient.patch<Client>(`/clients/${id}`, car),
   deleteClient: (id: number) => axiosClient.delete(`/clients/${id}`)
 }

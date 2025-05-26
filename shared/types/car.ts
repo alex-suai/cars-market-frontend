@@ -1,10 +1,20 @@
 export interface Car {
     id: number;
     vin: string;
-    model_version_id: number;
+    model: string;
+    model_version: string;
+    manufacturer: string;
     mileage: number;
     price: number;
     color: string;
     status: 'in_stock' | 'reserved' | 'sold' | 'ordered';
-    arrival_date: string;
+    arrival_date: Date;
+}
+
+export interface CarsModelVersion {
+    id: number;
+    name: string;
+    year_from: number;
+    year_to: number;
+    model: string;
 }

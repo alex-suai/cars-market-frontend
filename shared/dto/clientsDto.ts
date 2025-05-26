@@ -3,8 +3,6 @@ export interface CreateClientDto {
   surname?: string;
   phone_number?: string;
   email: string;
-  sales_amount?: number;
-  total_expenses?: number;
 }
 
 export type UpdateClientDto = Partial<CreateClientDto>;

@@ -36,7 +36,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     shadowOffset: { width: 0, height: 2 },
-    flexDirection: 'row'
+    flexDirection: 'row',
+    minHeight: 100
   },
   infoZone: {
     flex: 1

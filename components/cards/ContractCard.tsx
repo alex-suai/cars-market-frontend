@@ -3,13 +3,19 @@ import React, {useEffect} from 'react';
 import { StyleSheet, Text } from 'react-native';
 import Card from './Card';
 import {Contract} from '@/shared/types/contract';
+import {useModalFormContext} from '@/store/ModalFormContext';
+import {useContracts} from '@/store/ContractContext';
 
 export default function ContractCard({ contract }: { contract: Contract }) {
+  const modal = useModalFormContext();
+  const {deleteContract, setSelected} = useContracts();
+
   const onEdit = () => {
-
+    setSelected(contract);
+    modal.open();
   }
-  const onDelete = () => {
-
+  const onDelete = async () => {
+    await deleteContract(contract.id);
   }
 
   return (

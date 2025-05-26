@@ -2,13 +2,19 @@ import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 import Card from './Card';
 import {Client} from '@/shared/types/client';
+import {useModalFormContext} from '@/store/ModalFormContext';
+import {useClients} from '@/store/ClientContext';
 
 export default function ClientCard({ client }: { client: Client }) {
+  const modal = useModalFormContext();
+  const {deleteClient, setSelected} = useClients();
+
   const onEdit = () => {
-
+    setSelected(client);
+    modal.open();
   }
-  const onDelete = () => {
-
+  const onDelete = async () => {
+    await deleteClient(client.id);
   }
 
   return (

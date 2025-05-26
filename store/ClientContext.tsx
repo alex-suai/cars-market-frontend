@@ -1,90 +1,89 @@
-// @/store/ContractsContext.tsx
+// @/store/ClientsContext.tsx
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { Contract } from '@/shared/types/contract';
-import { CreateContractDto, UpdateContractDto } from '@/shared/dto/contractsDto';
-import {contractsApi} from '@/shared/api/contracts';
+import { Client } from '@/shared/types/client';
+import { CreateClientDto, UpdateClientDto } from '@/shared/dto/clientsDto';
+import {api} from '@/shared/api';
 
-interface ContractsContextValue {
-  items: Contract[];
+interface ClientsContextValue {
+  items: Client[];
   loading: boolean;
-  fetchContracts: () => void;
-  createContract: (contract: CreateContractDto) => void;
-  updateContract: (id: number, contract: UpdateContractDto) => void;
-  deleteContract: (id: number) => void;
+  selected: Client | null;
+  setSelected: (client: Client | null) => void;
+  fetchClients: () => Promise<void>;
+  createClient: (client: CreateClientDto) => Promise<void>;
+  updateClient: (id: number, client: UpdateClientDto) => Promise<void>;
+  deleteClient: (id: number) => Promise<void>;
 }
 
-const ContractsContext = createContext<ContractsContextValue | undefined>(undefined);
+const ClientsContext = createContext<ClientsContextValue | undefined>(undefined);
 
-export const ContractsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [items, setItems] = useState<Contract[]>([]);
+export const ClientsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [items, setItems] = useState<Client[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [selected, setSelected] = useState<Client | null>(null);
 
-  const fetchContracts = async () => {
+  const fetchClients = async () => {
     setLoading(true);
     try {
-      const { data } = await contractsApi.getAllContracts();
+      const { data } = await api.clientsApi.getAllClients();
       setItems(data);
     } catch (error) {
-      console.error('Failed to fetch contracts:', error);
+      console.error('Failed to fetch clients:', error);
     } finally {
       setLoading(false);
     }
   };
 
-  const createContract = async (contract: CreateContractDto) => {
+  const createClient = async (client: CreateClientDto) => {
     setLoading(true);
     try {
-      const { data } = await contractsApi.createContract(contract);
+      const { data } = await api.clientsApi.createClient(client);
       setItems(prev => [...prev, data]);
     } catch (error) {
-      console.error('Failed to create contract:', error);
+      console.error('Failed to create client:', error);
     } finally {
       setLoading(false);
     }
   };
 
-  const updateContract = async (id: number, contract: UpdateContractDto) => {
+  const updateClient = async (id: number, client: UpdateClientDto) => {
     setLoading(true);
     try {
-      const { data } = await contractsApi.updateContract(id, contract);
+      const { data } = await api.clientsApi.updateClient(id, client);
       setItems(prev => prev.map(c => (c.id === id ? data : c)));
     } catch (error) {
-      console.error('Failed to update contract:', error);
+      console.error('Failed to update client:', error);
     } finally {
       setLoading(false);
     }
   };
 
-  const deleteContract = async (id: number) => {
+  const deleteClient = async (id: number) => {
     setLoading(true);
     try {
-      await contractsApi.deleteContract(id);
+      await api.clientsApi.deleteClient(id);
       setItems(prev => prev.filter(c => c.id !== id));
     } catch (error) {
-      console.error('Failed to delete contract:', error);
+      console.error('Failed to delete client:', error);
     } finally {
       setLoading(false);
     }
   };
 
-  useEffect(() => {
-    fetchContracts();
-  }, []);
-
   return (
-    <ContractsContext.Provider
-      value={{ items, loading, fetchContracts, createContract, updateContract, deleteContract }}
+    <ClientsContext.Provider
+      value={{ items, loading, fetchClients, createClient, updateClient, deleteClient, selected, setSelected }}
     >
       {children}
-    </ContractsContext.Provider>
+    </ClientsContext.Provider>
   );
 };
 
-export const useContracts = () => {
-  const context = useContext(ContractsContext);
+export const useClients = () => {
+  const context = useContext(ClientsContext);
   if (!context) {
-    throw new Error('useContracts must be used within a ContractsProvider');
+    throw new Error('useClients must be used within a ClientsProvider');
   }
   return context;
 };

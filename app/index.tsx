@@ -17,7 +17,8 @@ export default function HomeScreen() {
       <Link href={'/clients'} style={styles.link}>Клиенты</Link>
       <Link href={'/contracts'} style={styles.link}>Контракты</Link>
       <Link href={'/sales'} style={styles.link}>Продажи</Link>
-      <Link href={'/'} style={styles.link}>Скидки</Link>
+      <Link href={'/discounts'} style={styles.link}>Скидки</Link>
+      <Link href={'/employees'} style={styles.link}>Сотрудники</Link>
     </View>
   );
 }
