@@ -19,7 +19,7 @@ export default function ContractCard({ contract }: { contract: Contract }) {
   }
 
   return (
-    <Card onEdit={onEdit} onDelete={onDelete}>
+    <Card onEdit={onEdit} onDelete={onDelete} accentColor={'#29b42b'}>
       <Text style={styles.title}>{contract.contract_number}</Text>
       <Text>Версия модели: {contract.car_model_version}</Text>
       <Text>Вин номер авто: {contract.car_vin}</Text>

@@ -18,7 +18,7 @@ export default function ClientCard({ client }: { client: Client }) {
   }
 
   return (
-    <Card onEdit={onEdit} onDelete={onDelete}>
+    <Card onEdit={onEdit} onDelete={onDelete} accentColor={'#ffd52a'}>
       <Text style={styles.title}>{client.name} {client.surname}</Text>
       <Text>Почта: {client.email}</Text>
       <Text>Телефон: {client.phone_number}</Text>

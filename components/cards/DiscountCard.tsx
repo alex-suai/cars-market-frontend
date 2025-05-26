@@ -18,7 +18,7 @@ export default function DiscountCard({ discount }: { discount: Discount }) {
   }
 
   return (
-    <Card onEdit={onEdit} onDelete={onDelete}>
+    <Card onEdit={onEdit} onDelete={onDelete} accentColor={'#461db0'}>
       <Text style={styles.title}>Скидка {discount.id}</Text>
       <Text>Описание: {discount.description}</Text>
       <Text>Начало действия: {new Date(discount.start_date).toDateString()}</Text>

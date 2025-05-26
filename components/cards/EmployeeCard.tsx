@@ -24,7 +24,7 @@ export default function EmployeeCard({ employee }: Props) {
   };
 
   return (
-    <Card onEdit={onEdit} onDelete={onDelete}>
+    <Card onEdit={onEdit} onDelete={onDelete} accentColor={'#a8cb20'}>
       <Text style={styles.title}>{employee.name} {employee.surname}</Text>
       <Text>Должность: {employee.profession}</Text>
     </Card>

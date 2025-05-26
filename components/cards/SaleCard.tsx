@@ -13,7 +13,7 @@ export default function SaleCard({ sale }: { sale: Sale }) {
   }
 
   return (
-    <Card onDelete={onDelete}>
+    <Card onDelete={onDelete} accentColor={'#ad2594'}>
       <Text style={styles.title}>{sale.contract_number}</Text>
       <Text>Автомобиль: {sale.car_vin}</Text>
       <Text>Выручка: {sale.profit} ₽</Text>

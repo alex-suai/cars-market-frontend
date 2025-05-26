@@ -13,7 +13,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { useDiscounts } from '@/store/DiscountContext';
 import { DiscountDto } from '@/shared/dto';
 import {useContracts} from '@/store/ContractContext';
-import {SimpleMultiSelect} from '@/components/SimpleMultiSelect';
+import {MultiSelect} from '@/components/MultiSelect';
 
 type Props = {
   onSubmit: (data: DiscountDto) => void;
@@ -88,10 +88,12 @@ export default function DiscountForm({ onSubmit }: Props) {
       />
 
       <Text>Контракты</Text>
-      <SimpleMultiSelect
-        contracts={contracts}
-        selectedContractNumbers={selectedContractNumbers}
+      <MultiSelect
+        items={contracts}
+        selectedIds={selectedContractNumbers}
         onSelectionChange={setSelectedContractNumbers}
+        getId={contract => contract.contract_number}
+        renderItemLabel={contract => `Контракт ${contract.contract_number}`}
       />
 
       <Text>Дата начала</Text>

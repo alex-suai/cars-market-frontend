@@ -54,15 +54,22 @@ const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 8,
     width: "75%",
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    shadowOffset: { width: 2, height: 3 },
+    elevation: 3,
   },
   bottom: {
     width: "100%",
     height: "12%",
+    backgroundColor: COLORS.greyBackgroundColor,
     justifyContent: 'center',
     alignItems: 'center',
   },
   buttonText: {
     fontSize: 16,
+    fontWeight: 600,
     textAlign: "center",
   }
 })

@@ -20,7 +20,7 @@ export default function CarCard({ car }: { car: Car}) {
   }
 
   return (
-    <Card onEdit={onEdit} onDelete={onDelete}>
+    <Card onEdit={onEdit} onDelete={onDelete} accentColor={'#29a8ff'}>
       <Text style={styles.title}>{car.vin}</Text>
       <Text>Цвет: {car.color}</Text>
       <Text>Пробег: {car.mileage} км</Text>

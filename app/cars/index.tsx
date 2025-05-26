@@ -41,7 +41,7 @@ export default function CarsScreen() {
       items={store.items}
       loading={store.loading}
       renderCard={(car) => <CarCard car={car}/>}
-      modalTitle="Добавить машину"
+      modalTitle={store.selected ? "Редактировать машину" : "Добавить машину"}
       concreteModalForm={<CarForm onSubmit={handleSubmit} />}
       modalControl={{...modal, close: handleCancel} }// <-- прокинем сюда управление
     />
